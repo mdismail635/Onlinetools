@@ -1,0 +1,321 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Compress, convert, and optimize images, videos, PDFs, Word documents, and Excel files online for free. Reduce file size without losing quality.">
+  <meta name="keywords" content="file compressor, file converter, compress images, compress videos, compress PDFs, compress Word, compress Excel, free file compression">
+  <meta name="author" content="Your Name">
+  <title>Multi-File Tool - Compress, Convert, and Optimize Files Online</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #1e1e2f, #2a2a40);
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin: 0;
+      background: linear-gradient(90deg, #6a11cb, #2575fc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    header p {
+      font-size: 1.1rem;
+      color: #a1a1a1;
+    }
+
+    main {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 15px;
+      padding: 2rem;
+      width: 90%;
+      max-width: 500px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .upload-section, .compression-section, .output-section {
+      margin-bottom: 1.5rem;
+    }
+
+    .upload-label {
+      display: inline-block;
+      background: linear-gradient(90deg, #6a11cb, #2575fc);
+      color: white;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 8px;
+      text-align: center;
+      transition: transform 0.2s ease;
+    }
+
+    .upload-label:hover {
+      transform: scale(1.05);
+    }
+
+    #file-upload {
+      display: none;
+    }
+
+    #file-name {
+      margin-top: 10px;
+      font-size: 0.9rem;
+      color: #a1a1a1;
+    }
+
+    #compression-level {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      font-size: 1rem;
+    }
+
+    #compress-btn {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(90deg, #6a11cb, #2575fc);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: transform 0.2s ease;
+    }
+
+    #compress-btn:hover {
+      transform: scale(1.05);
+    }
+
+    #progress-bar {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      margin-top: 20px;
+      overflow: hidden;
+    }
+
+    #progress {
+      width: 0%;
+      height: 10px;
+      background: linear-gradient(90deg, #6a11cb, #2575fc);
+      border-radius: 8px;
+      transition: width 0.3s ease;
+    }
+
+    #output-file {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    #download-link {
+      display: none;
+      margin-top: 20px;
+      color: #6a11cb;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.2s ease;
+    }
+
+    #download-link:hover {
+      color: #2575fc;
+    }
+
+    .ad-container {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    footer {
+      text-align: center;
+      padding: 10px;
+      color: #a1a1a1;
+      margin-top: 2rem;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    main {
+      animation: fadeIn 0.8s ease-out;
+    }
+  </style>
+  <!-- Google AdSense Script -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_AD_CLIENT_ID" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header>
+    <h1>Multi-File Tool</h1>
+    <p>Compress, convert, and optimize images, videos, PDFs, Word documents, and Excel files for free!</p>
+  </header>
+
+  <main>
+    <!-- AdSense Ad Unit -->
+    <div class="ad-container">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-YOUR_AD_CLIENT_ID"
+           data-ad-slot="YOUR_AD_UNIT_ID"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
+
+    <!-- File Upload Section -->
+    <section class="upload-section">
+      <input type="file" id="file-upload" accept="image/*, video/*, .pdf, .doc, .docx, .xls, .xlsx" multiple />
+      <label for="file-upload" class="upload-label">Choose Files (Max 8 GB)</label>
+      <p id="file-name"></p>
+    </section>
+
+    <!-- Compression Level Section -->
+    <section class="compression-section">
+      <label for="compression-level">Compression Level:</label>
+      <select id="compression-level">
+        <option value="low">Low (Smaller Size, Lower Quality)</option>
+        <option value="medium" selected>Medium (Balanced Size and Quality)</option>
+        <option value="high">High (Larger Size, Higher Quality)</option>
+      </select>
+    </section>
+
+    <!-- File Conversion Section -->
+    <section class="conversion-section">
+      <label for="file-format">Convert To:</label>
+      <select id="file-format">
+        <option value="original">Keep Original Format</option>
+        <option value="jpg">JPG (for images)</option>
+        <option value="png">PNG (for images)</option>
+        <option value="mp4">MP4 (for videos)</option>
+        <option value="mp3">MP3 (for videos)</option>
+        <option value="pdf">PDF (for documents)</option>
+        <option value="docx">DOCX (for documents)</option>
+        <option value="xlsx">XLSX (for spreadsheets)</option>
+      </select>
+    </section>
+
+    <!-- Compress Button -->
+    <button id="compress-btn">Process Files</button>
+
+    <!-- Progress Bar -->
+    <div id="progress-bar">
+      <div id="progress"></div>
+    </div>
+
+    <!-- Output Section -->
+    <section class="output-section">
+      <h2>Processed Files</h2>
+      <div id="output-file"></div>
+      <a id="download-link" download="processed-file">Download Processed File</a>
+    </section>
+
+    <!-- AdSense Ad Unit -->
+    <div class="ad-container">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-YOUR_AD_CLIENT_ID"
+           data-ad-slot="YOUR_AD_UNIT_ID"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2023 Multi-File Tool. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // JavaScript for File Processing
+    document.getElementById('file-upload').addEventListener('change', function (e) {
+      const files = e.target.files;
+      let fileNames = '';
+      for (let i = 0; i < files.length; i++) {
+        fileNames += files[i].name + ', ';
+      }
+      document.getElementById('file-name').textContent = `Selected Files: ${fileNames.slice(0, -2)}`;
+    });
+
+    document.getElementById('compress-btn').addEventListener('click', async function () {
+      const fileInput = document.getElementById('file-upload');
+      const compressionLevel = document.getElementById('compression-level').value;
+      const fileFormat = document.getElementById('file-format').value;
+
+      if (fileInput.files.length === 0) {
+        alert('Please select files first!');
+        return;
+      }
+
+      const files = fileInput.files;
+
+      // Check file size (up to 8 GB for videos)
+      for (let i = 0; i < files.length; i++) {
+        if (files[i].type.startsWith('video/') && files[i].size > 8 * 1024 * 1024 * 1024) {
+          alert('One or more video files exceed 8 GB. Please upload smaller files.');
+          return;
+        }
+      }
+
+      // Show progress bar
+      const progressBar = document.getElementById('progress');
+      progressBar.style.width = '0%';
+
+      // Upload and process files
+      const formData = new FormData();
+      for (let i = 0; i < files.length; i++) {
+        formData.append('files', files[i]);
+      }
+      formData.append('compressionLevel', compressionLevel);
+      formData.append('fileFormat', fileFormat);
+
+      try {
+        const response = await fetch('/process', {
+          method: 'POST',
+          body: formData,
+        });
+
+        if (!response.ok) {
+          throw new Error('Processing failed. Please try again.');
+        }
+
+        const result = await response.json();
+        const downloadLink = document.getElementById('download-link');
+        downloadLink.href = result.downloadUrl;
+        downloadLink.style.display = 'block';
+      } catch (error) {
+        alert(error.message);
+      }
+    });
+  </script>
+</body>
+</html>
+
+
+
